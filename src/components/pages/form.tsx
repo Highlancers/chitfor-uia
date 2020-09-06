@@ -109,9 +109,9 @@ const FormApp = () => {
             <Button type="primary" loading={loading} htmlType="submit">
               Save
             </Button>{' '}
-            <Button type="danger" htmlType="button" onClick={() => history.push('/list')}>
+            {/* <Button type="danger" htmlType="button" onClick={() => history.push('/list')}>
               Back
-            </Button>
+            </Button> */}
               </div>
           </Form>
           </Col>
