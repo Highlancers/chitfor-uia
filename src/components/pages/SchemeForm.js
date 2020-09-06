@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import moment from 'moment';
 import {
   Form,
+  Select,
   Input,
+  InputNumber,
   Tooltip,
-  Checkbox,
   Button,
 } from 'antd';
 import { DatePicker } from 'antd';
@@ -12,22 +13,8 @@ import axios from 'axios';
 import { message } from 'antd';
 import {useHistory} from 'react-router'; 
 const formItemLayout = {
-  labelCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 8,
-    },
-  },
-  wrapperCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 16,
-    },
-  },
+  labelCol: { span: 6 },
+  wrapperCol: { span: 14 },
 };
 const tailFormItemLayout = {
   wrapperCol: {
@@ -42,6 +29,7 @@ const tailFormItemLayout = {
   },
 };
 
+const { Option } = Select;
 const SchemeDetails = () => {
 
   const history = useHistory();
@@ -75,7 +63,7 @@ const SchemeDetails = () => {
       //console.log(res.data);
       if(res.data.statusCode ==200){
         success(res.data.message);
-        history.push('/UserDetails');
+        history.push('/SchemeDetails');
       }
       
       else
@@ -86,6 +74,10 @@ const SchemeDetails = () => {
   })
   };
   
+  function disabledDate(current) {
+    // Can not select days before today and today
+    return current && current < moment().endOf('day');
+  }
  
   return (
 
@@ -97,11 +89,11 @@ const SchemeDetails = () => {
       scrollToFirstError
     >
        <Form.Item
-        name="name"
+        name="schemeName"
         label={
           <span>
-            Member Name&nbsp;
-            <Tooltip title="Please enter your member name">
+            Scheme Name&nbsp;
+            <Tooltip title="Please enter your Scheme name">
                
             </Tooltip>
           </span>
@@ -109,7 +101,7 @@ const SchemeDetails = () => {
         rules={[
           {
             required: true,
-            message: 'Please input your member name!',
+            message: 'Please input your Scheme name!',
             whitespace: true,
           },
         ]}
@@ -118,11 +110,11 @@ const SchemeDetails = () => {
       </Form.Item>
 
       <Form.Item
-        name="phone"
+        name="schemeLimit"
         label={
           <span>
-            phone&nbsp;
-            <Tooltip title="Please enter your phone">
+            Scheme Limit &nbsp;
+            <Tooltip title="Please enter Scheme Limit ">
                
             </Tooltip>
           </span>
@@ -130,20 +122,19 @@ const SchemeDetails = () => {
         rules={[
           {
             required: true,
-            message: 'Please input your phone !',
-            whitespace: true,
+            message: 'Please input your Scheme Limit  !',
           },
         ]}
       >
-        <Input />
+        <InputNumber min={1000} max={9999999} />
       </Form.Item>
        
       <Form.Item
-        name="email"
+        name="duration"
         label={
           <span>
-            Email &nbsp;
-            <Tooltip title="Please enter your email">
+            Duration (In months) &nbsp;
+            <Tooltip title="Please enter Duration (In months)">
                
             </Tooltip>
           </span>
@@ -151,87 +142,73 @@ const SchemeDetails = () => {
         rules={[
           {
             required: true,
-            message: 'Please input your email !',
-            whitespace: true,
+            message: 'Please input Duration (In months)!',
           },
         ]}
       >
-        <Input />
+        <InputNumber min={1} max={100} />
       </Form.Item>
 
       <Form.Item
-        name="pan"
-        label={
-          <span>
-            PAN &nbsp;
-            <Tooltip title="Please enter pan">
-               
-            </Tooltip>
-          </span>
-        }
-        rules={[
-          {
-            required: true,
-            message: 'Please input PAN !',
-            whitespace: true,
-          },
-        ]}
+        name="typeOfScheme"
+        label="Scheme Type"
+        hasFeedback
+        rules={[{ required: true, message: 'Please select Scheme Type!' }]}
       >
-        <Input />
-      </Form.Item>
-        
-      <Form.Item
-        name="address"
-        label={
-          <span>
-            Address &nbsp;
-            <Tooltip title="Please enter address">
-               
-            </Tooltip>
-          </span>
-        }
-        rules={[
-          {
-            required: true,
-            message: 'Please input address !',
-            whitespace: true,
-          },
-        ]}
-      >
-        <Input />
+        <Select placeholder="Please select a Scheme Type">
+          <Option value="FIXED">FIXED</Option>
+          <Option value="VARIABLE">VARIABLE</Option>
+        </Select>
       </Form.Item>
 
-       <Form.Item  name="dob" label="dob"
+      <Form.Item
+        name="totalMembers"
+        label={
+          <span>
+            Total Members  &nbsp;
+            <Tooltip title="Please enter No. of members in Scheme">
+               
+            </Tooltip>
+          </span>
+        }
+        rules={[
+          {
+            required: true,
+            message: 'Please enter No. of members in Scheme"!', 
+          },
+        ]}
+      >
+        <InputNumber min={1} max={100} />
+      </Form.Item>
+
+      <Form.Item
+        name="payingDate"
+        label="Date to be paid (of month)"
+        hasFeedback
+        rules={[{ required: true, message: 'Date to be paid (of month)!' }]}
+      >
+        <Select placeholder="Please select Date to be paid (of month)">
+          <Option value="1">1st of each month</Option>
+          <Option value="2">5th of each month</Option>
+          <Option value="2">10th of each month</Option>
+          <Option value="2">15th of each month</Option>
+        </Select>
+      </Form.Item>
+
+       <Form.Item  name="startDate" label="Start Date"
        rules={[
         {
           required: true,
-          message: 'Please input your dob!',
+          message: 'Please input Start Date!',
         },
       ]}
       >
-          <DatePicker />
+          <DatePicker disabledDate={disabledDate}/>
         </Form.Item>
-
-      
-  
-      <Form.Item
-        name="agreement"
-        valuePropName="checked"
-        rules={[
-          {
-            validator: (_, value) =>
-              value ? Promise.resolve() : Promise.reject('Should accept agreement'),
-          },
-        ]}
-        {...tailFormItemLayout}
-      >
-        <Checkbox>
-          I have read the <a href="">agreement</a>
-        </Checkbox>
-      </Form.Item>
+ 
       <Form.Item {...tailFormItemLayout}>
         <Button type="primary" htmlType="submit">
-          Register
+          Add Scheme
         </Button>
       </Form.Item>
     </Form>
