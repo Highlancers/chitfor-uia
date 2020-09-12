@@ -17,7 +17,7 @@ const OrganiserDetails = () => {
   };
 
   useEffect(() => {
-    axios.get(`http://nyalla:8089/management/organiser/orgId/8`).then(res => {
+    axios.get(`https://298a99d0bad8.ngrok.io/management/organiser/orgId/8`).then(res => {
       console.log(res.data.data)
       setAllData(res.data.data);
     }).catch(err => {
