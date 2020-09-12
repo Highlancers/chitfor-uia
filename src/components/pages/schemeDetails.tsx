@@ -17,7 +17,7 @@ const SchemeDetails = () => {
   };
 
   useEffect(() => {
-    axios.get(`http://nyalla:8089/management/member/addedBy/8`).then(res => {
+    axios.get(`http://nyalla:8089/management/scheme/addedBy/8`).then(res => {
       console.log(res.data.data)
       setAllData(res.data.data);
     }).catch(err => {
@@ -28,29 +28,37 @@ const SchemeDetails = () => {
 
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
+      title: 'Scheme Name',
+      dataIndex: 'schemaName',
       render: (text: React.ReactNode) => <a>{text}</a>
     },
     {
-      title: 'Phone',
-      dataIndex: 'phone'
+      title: 'Limit',
+      dataIndex: 'limit'
     },
     {
-      title: 'Email',
-      dataIndex: 'email'
+      title: 'Duration',
+      dataIndex: 'duration'
     },
     {
-      title: 'PAN',
-      dataIndex: 'pan'
+      title: 'Start Date',
+      dataIndex: 'startDate'
     },
     {
-      title: 'Address',
-      dataIndex: 'address'
+      title: 'Type',
+      dataIndex: 'type'
     },
     {
-      title: 'DOB',
-      dataIndex: 'dob'
+      title: 'Date Of Payment',
+      dataIndex: 'dateOfPayment'
+    },
+    {
+      title: 'Total Members',
+      dataIndex: 'totalMembers'
+    },
+    {
+      title: 'Amount',
+      dataIndex: 'amount'
     },
      
   ];
@@ -58,15 +66,16 @@ const SchemeDetails = () => {
   const data:any = [{
   }];
 
-  allData.map((member: any) => {
+  allData.map((scheme: any) => {
     data.push({
-     key: member.memberId,
-     name: member.name,
-     phone: member.phone,
-     email: member.email,
-     pan: member.pan,
-     address: member.address,
-     dob: moment(new Date(member.dob)).format('YYYY-MM-DD'),
+      schemaName: scheme.schemaName,
+     limit: scheme.limit,
+     duration: scheme.duration,
+     type: scheme.type,
+     dateOfPayment: scheme.dateOfPayment,
+     totalMembers: scheme.totalMembers,
+     amount: scheme.amount,
+     startDate: moment(new Date(scheme.startDate)).format('YYYY-MM-DD'),
       
    })
    return data;

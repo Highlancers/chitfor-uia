@@ -44,16 +44,17 @@ const SchemeDetails = () => {
   };
   const onFinish = values => {
     const org = {
-      name: values.name,
-      phone: values.phone,
-      email: values.email,
-      pan: values.pan,
-      address: values.address,
-      dob:  moment(values.dob).format('YYYY-MM-DD'), 
+      schemaName: values.schemeName,
+      limit: values.schemeLimit,
+      duration: values.duration,
+      type: values.typeOfScheme,
+      totalMembers: values.totalMembers,
+      dateOfPayment:values.payingDate,
+      startDate:  moment(values.startDate).format('YYYY-MM-DD'), 
     };
     const stringJson = JSON.stringify(org);
     //console.log('JSON  ',stringJson);
-    axios.post(`http://nyalla:8089/management/member/addedBy/8`, org, {
+    axios.post(`http://nyalla:8089/management/scheme/addedBy/8`, org, {
       headers: {
         'content-type': 'application/json'
       }
@@ -189,9 +190,9 @@ const SchemeDetails = () => {
       >
         <Select placeholder="Please select Date to be paid (of month)">
           <Option value="1">1st of each month</Option>
-          <Option value="2">5th of each month</Option>
-          <Option value="2">10th of each month</Option>
-          <Option value="2">15th of each month</Option>
+          <Option value="5">5th of each month</Option>
+          <Option value="10">10th of each month</Option>
+          <Option value="15">15th of each month</Option>
         </Select>
       </Form.Item>
 
