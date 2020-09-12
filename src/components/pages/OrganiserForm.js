@@ -69,7 +69,7 @@ const OrganiserForm = () => {
     };
     const stringJson = JSON.stringify(org);
     //console.log('JSON  ',stringJson);
-    axios.post(`http://nyalla:8089/management/organiser/orgId/8`, org, {
+    axios.post(`http://192.168.0.105:8089/management/organiser/orgId/8`, org, {
       headers: {
         'content-type': 'application/json'
       }

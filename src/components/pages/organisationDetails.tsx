@@ -16,7 +16,7 @@ const OrganisationDetails = () => {
   };
 
   useEffect(() => {
-    axios.get(`http://nyalla:8089/management/organisation/organisationId/8`).then(res => {
+    axios.get(`http://192.168.0.105:8089/management/organisation/organisationId/8`).then(res => {
       console.log(res.data.data)
       setAllData(res.data.data);
     }).catch(err => {
