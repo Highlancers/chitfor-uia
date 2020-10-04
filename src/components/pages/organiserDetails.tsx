@@ -17,7 +17,7 @@ const OrganiserDetails = () => {
   };
 
   useEffect(() => {
-    axios.get(`https://298a99d0bad8.ngrok.io/management/organiser/orgId/8`).then(res => {
+    axios.get(`https://chitfor.herokuapp.com/management/organiser/orgId/1`).then(res => {
       console.log(res.data.data)
       setAllData(res.data.data);
     }).catch(err => {

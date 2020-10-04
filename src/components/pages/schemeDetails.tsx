@@ -17,7 +17,7 @@ const SchemeDetails = () => {
   };
 
   useEffect(() => {
-    axios.get(`http://nyalla:8089/management/scheme/addedBy/8`).then(res => {
+    axios.get(`https://chitfor.herokuapp.com/management/scheme/addedBy/1`).then(res => {
       console.log(res.data.data)
       setAllData(res.data.data);
     }).catch(err => {

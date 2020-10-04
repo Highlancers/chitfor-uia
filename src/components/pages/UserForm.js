@@ -65,7 +65,7 @@ const UserForm = () => {
     };
     const stringJson = JSON.stringify(org);
     //console.log('JSON  ',stringJson);
-    axios.post(`http://nyalla:8089/management/member/addedBy/8`, org, {
+    axios.post(`https://chitfor.herokuapp.com/management/member/addedBy/1`, org, {
       headers: {
         'content-type': 'application/json'
       }

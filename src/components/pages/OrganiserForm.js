@@ -69,7 +69,7 @@ const OrganiserForm = () => {
     };
     const stringJson = JSON.stringify(org);
     //console.log('JSON  ',stringJson);
-    axios.post(`https://298a99d0bad8.ngrok.io/management/organiser/orgId/8`, org, {
+    axios.post(`https://chitfor.herokuapp.com/management/organiser/orgId/1`, org, {
       headers: {
         'content-type': 'application/json'
       }

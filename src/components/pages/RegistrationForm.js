@@ -62,7 +62,7 @@ const RegistrationForm = () => {
     };
     const stringJson = JSON.stringify(org);
     //console.log('JSON  ',stringJson);
-    axios.post(`http://nyalla:8089/management/organisation`, org, {
+    axios.post(`https://chitfor.herokuapp.com/management/organisation`, org, {
       headers: {
         'content-type': 'application/json'
       }

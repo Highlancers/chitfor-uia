@@ -54,7 +54,7 @@ const SchemeDetails = () => {
     };
     const stringJson = JSON.stringify(org);
     //console.log('JSON  ',stringJson);
-    axios.post(`http://nyalla:8089/management/scheme/addedBy/8`, org, {
+    axios.post(`https://chitfor.herokuapp.com/management/scheme/addedBy/1`, org, {
       headers: {
         'content-type': 'application/json'
       }
